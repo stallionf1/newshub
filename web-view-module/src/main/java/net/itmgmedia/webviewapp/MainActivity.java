@@ -99,8 +99,13 @@ public class MainActivity extends Activity {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            if(Customizaton.IS_ALL_HOSTS_ACCEPTED){
+                return false;
+            }
+
             Uri uri = Uri.parse(url);
             String host = uri.getHost();
+
             if (host != null && (host.equals(Customizaton.WEB_HOST) ||
                     host.endsWith(Customizaton.WEB_HOST_SUFFIX))) {
                 return false;
