@@ -2,10 +2,14 @@ package net.itmgmedia.webviewapp;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -95,11 +99,17 @@ public class MainActivity extends Activity {
         webView.loadUrl(currentUrl);
     }
 
+    private boolean isConnected() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
     private class MainWebViewClient extends WebViewClient {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            if(Customizaton.IS_ALL_HOSTS_ACCEPTED){
+            if (Customizaton.IS_ALL_HOSTS_ACCEPTED) {
                 return false;
             }
 
@@ -129,43 +139,9 @@ public class MainActivity extends Activity {
 
         @Override
         public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-            errorText.setText(getMessageResourceId(errorCode));
+            Log.w(getClass().getSimpleName(), "Error #" + errorCode);
+            errorText.setText(isConnected() ? R.string.service_temporarily_unavailable : R.string.check_internet_connection);
             showView(errorLayout);
-        }
-
-        private int getMessageResourceId(int errorCode) {
-            switch (errorCode) {
-                case ERROR_UNKNOWN:
-                    return R.string.ERROR_UNKNOWN;
-                case ERROR_HOST_LOOKUP:
-                    return R.string.ERROR_HOST_LOOKUP;
-                case ERROR_UNSUPPORTED_AUTH_SCHEME:
-                    return R.string.ERROR_UNSUPPORTED_AUTH_SCHEME;
-                case ERROR_AUTHENTICATION:
-                    return R.string.ERROR_AUTHENTICATION;
-                case ERROR_PROXY_AUTHENTICATION:
-                    return R.string.ERROR_PROXY_AUTHENTICATION;
-                case ERROR_CONNECT:
-                    return R.string.ERROR_CONNECT;
-                case ERROR_IO:
-                    return R.string.ERROR_IO;
-                case ERROR_TIMEOUT:
-                    return R.string.ERROR_TIMEOUT;
-                case ERROR_REDIRECT_LOOP:
-                    return R.string.ERROR_REDIRECT_LOOP;
-                case ERROR_UNSUPPORTED_SCHEME:
-                    return R.string.ERROR_UNSUPPORTED_SCHEME;
-                case ERROR_FAILED_SSL_HANDSHAKE:
-                    return R.string.ERROR_FAILED_SSL_HANDSHAKE;
-                case ERROR_BAD_URL:
-                    return R.string.ERROR_BAD_URL;
-                case ERROR_FILE_NOT_FOUND:
-                    return R.string.ERROR_FILE_NOT_FOUND;
-                case ERROR_TOO_MANY_REQUESTS:
-                    return R.string.ERROR_TOO_MANY_REQUESTS;
-                default:
-                    return R.string.ERROR_UNKNOWN;
-            }
         }
     }
 }

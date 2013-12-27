@@ -2,19 +2,6 @@
 <resources>
     <string name="action_home">Open the home page</string>
     <string name="button_retry">Retry</string>
-    <string name="ERROR_UNKNOWN">Generic error</string>
-    <string name="ERROR_HOST_LOOKUP">Server or proxy hostname lookup failed</string>
-    <string name="ERROR_UNSUPPORTED_AUTH_SCHEME">Unsupported authentication scheme (not basic or digest)</string>
-    <string name="ERROR_AUTHENTICATION">User authentication failed on server</string>
-    <string name="ERROR_PROXY_AUTHENTICATION">User authentication failed on proxy</string>
-    <string name="ERROR_CONNECT">Failed to connect to the server</string>
-    <string name="ERROR_IO">Failed to read or write to the server</string>
-    <string name="ERROR_TIMEOUT">Connection timed out</string>
-    <string name="ERROR_REDIRECT_LOOP">Too many redirects</string>
-    <string name="ERROR_UNSUPPORTED_SCHEME">Unsupported URI scheme</string>
-    <string name="ERROR_FAILED_SSL_HANDSHAKE">Failed to perform SSL handshake</string>
-    <string name="ERROR_BAD_URL">Malformed URL</string>
-    <string name="ERROR_FILE">Generic file error</string>
-    <string name="ERROR_FILE_NOT_FOUND">File not found</string>
-    <string name="ERROR_TOO_MANY_REQUESTS">Too many requests during this load</string>
+    <string name="service_temporarily_unavailable">Service temporarily unavailable. Please try again later.</string>
+    <string name="check_internet_connection">Please check your internet connection</string>
 </resources>

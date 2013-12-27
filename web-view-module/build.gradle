@@ -14,7 +14,7 @@ repositories {
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.0"
+    buildToolsVersion "19.0.1"
 
     defaultConfig {
         minSdkVersion 7
@@ -37,7 +37,7 @@ android {
             packageName "net.itmgmedia.m4shared"
         }
 
-        newsHub {
+        newshub {
             packageName "net.itmgmedia.newshub"
         }
     }
